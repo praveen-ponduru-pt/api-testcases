@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "API Capturer",
+  "version": "1.0.0",
+  "description": "Capture API endpoints from DevTools and send to VS Code for test generation",
+  "devtools_page": "devtools.html",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "permissions": ["storage"],
+  "host_permissions": ["http://localhost:3333/"],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png"
+  }
+}

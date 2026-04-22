@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 420px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 12px;
+      background: #1e1e1e;
+      color: #d4d4d4;
+    }
+    #header {
+      padding: 10px 12px;
+      background: #252526;
+      border-bottom: 1px solid #3c3c3c;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    #header h1 { font-size: 13px; font-weight: 600; flex: 1; color: #fff; }
+    #status { font-size: 11px; color: #858585; }
+    #toolbar {
+      padding: 8px 12px;
+      display: flex;
+      gap: 6px;
+      background: #252526;
+      border-bottom: 1px solid #3c3c3c;
+    }
+    #filter-input {
+      flex: 1;
+      padding: 4px 8px;
+      background: #3c3c3c;
+      border: 1px solid #555;
+      border-radius: 3px;
+      color: #d4d4d4;
+      font-size: 11px;
+      outline: none;
+    }
+    #filter-input::placeholder { color: #666; }
+    #clear-btn {
+      padding: 4px 10px;
+      background: #3c3c3c;
+      border: 1px solid #555;
+      border-radius: 3px;
+      color: #d4d4d4;
+      cursor: pointer;
+      font-size: 11px;
+    }
+    #clear-btn:hover { background: #4a4a4a; }
+    #request-list {
+      max-height: 340px;
+      overflow-y: auto;
+    }
+    #request-list::-webkit-scrollbar { width: 6px; }
+    #request-list::-webkit-scrollbar-track { background: #1e1e1e; }
+    #request-list::-webkit-scrollbar-thumb { background: #555; border-radius: 3px; }
+    .request-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-bottom: 1px solid #2d2d2d;
+      cursor: pointer;
+    }
+    .request-row:hover { background: #2a2d2e; }
+    .request-row.selected { background: #04395e; }
+    .method {
+      font-weight: 700;
+      font-size: 10px;
+      min-width: 38px;
+      padding: 1px 4px;
+      border-radius: 2px;
+      text-align: center;
+    }
+    .method.GET    { color: #4ec9b0; border: 1px solid #4ec9b0; }
+    .method.POST   { color: #569cd6; border: 1px solid #569cd6; }
+    .method.PUT    { color: #dcdcaa; border: 1px solid #dcdcaa; }
+    .method.DELETE { color: #f44747; border: 1px solid #f44747; }
+    .method.PATCH  { color: #ce9178; border: 1px solid #ce9178; }
+    .url {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: #d4d4d4;
+      font-family: 'Consolas', monospace;
+      font-size: 11px;
+    }
+    .status-code { font-size: 10px; color: #858585; min-width: 28px; text-align: right; }
+    #empty-state {
+      padding: 32px 12px;
+      text-align: center;
+      color: #858585;
+      line-height: 1.6;
+    }
+    #empty-state strong { display: block; color: #d4d4d4; margin-bottom: 6px; }
+    #footer {
+      padding: 8px 12px;
+      background: #252526;
+      border-top: 1px solid #3c3c3c;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    #selection-info { flex: 1; font-size: 11px; color: #858585; }
+    #send-btn {
+      padding: 5px 14px;
+      background: #0e639c;
+      border: none;
+      border-radius: 3px;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    #send-btn:hover:not(:disabled) { background: #1177bb; }
+    #send-btn:disabled { background: #3c3c3c; color: #666; cursor: not-allowed; }
+    #send-btn.success { background: #388a34; }
+    #send-btn.error   { background: #6b1a1a; }
+    .devtools-note {
+      padding: 6px 12px;
+      background: #2d2d00;
+      border-bottom: 1px solid #3c3c3c;
+      font-size: 10px;
+      color: #999;
+    }
+    .devtools-note span { color: #dcdcaa; }
+  </style>
+</head>
+<body>
+  <div id="header">
+    <h1>API Capturer</h1>
+    <span id="status">0 captured</span>
+  </div>
+  <div class="devtools-note">
+    Open <span>DevTools (F12)</span> to start capturing network requests
+  </div>
+  <div id="toolbar">
+    <input id="filter-input" type="text" placeholder="Filter by URL…">
+    <button id="clear-btn">Clear</button>
+  </div>
+  <div id="request-list"></div>
+  <div id="footer">
+    <span id="selection-info">Select endpoints to send</span>
+    <button id="send-btn" disabled>Send to VS Code</button>
+  </div>
+  <script src="shared.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{
+  "name": "api-test-generator",
+  "displayName": "API Test Generator",
+  "description": "Receive API endpoints from Chrome extension and generate .http test files + markdown test cases via Claude",
+  "version": "0.1.0",
+  "publisher": "qa-poc",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Testing"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "testcaseGenerator.generateTests",
+        "title": "Generate API Tests"
+      },
+      {
+        "command": "testcaseGenerator.clearEndpoints",
+        "title": "Clear Captured Endpoints"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.39",
+    "@types/vscode": "^1.90.0",
+    "typescript": "^5.3.0"
+  }
+}

@@ -1,0 +1,5 @@
+.env
+*/node_modules
+testcases/
+*.http
+vscode-extension/out/
