@@ -127,7 +127,8 @@ async function sendToVSCode() {
   const payload = buildPayload(selected);
 
   const btn = document.getElementById('send-btn');
-  btn.textContent = 'Sending…';
+  const btnText = document.getElementById('send-btn-text');
+  btnText.textContent = 'Sending…';
   btn.disabled = true;
   btn.className = '';
 
@@ -139,11 +140,11 @@ async function sendToVSCode() {
     });
 
     if (res.ok) {
-      btn.textContent = '✓ Sent!';
+      btnText.textContent = 'Sent!';
       btn.className = 'success';
       selectedIndices.clear();
       setTimeout(() => {
-        btn.textContent = 'Send to VS Code';
+        btnText.textContent = 'Send to VS Code';
         btn.className = '';
         btn.disabled = true;
         updateFooter();
@@ -152,10 +153,10 @@ async function sendToVSCode() {
       throw new Error(`HTTP ${res.status}`);
     }
   } catch {
-    btn.textContent = '✗ VS Code not running?';
+    btnText.textContent = 'VS Code not running?';
     btn.className = 'error';
     setTimeout(() => {
-      btn.textContent = 'Send to VS Code';
+      btnText.textContent = 'Send to VS Code';
       btn.className = '';
       btn.disabled = false;
     }, 3000);

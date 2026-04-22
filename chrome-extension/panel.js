@@ -128,7 +128,8 @@ document.getElementById('send-btn').addEventListener('click', async function () 
   const payload = buildPayload(selected);
 
   const btn = document.getElementById('send-btn');
-  btn.textContent = 'Sending…';
+  const btnText = document.getElementById('send-btn-text');
+  btnText.textContent = 'Sending…';
   btn.disabled = true;
 
   try {
@@ -138,14 +139,17 @@ document.getElementById('send-btn').addEventListener('click', async function () 
       body: JSON.stringify(payload),
     });
     if (res.ok) {
-      btn.textContent = '✓ Sent!';
-      setTimeout(() => { btn.textContent = 'Send to VS Code'; btn.disabled = selectedIndices.size === 0; }, 2500);
+      btnText.textContent = 'Sent!';
+      btn.classList.add('success');
+      setTimeout(() => { btnText.textContent = 'Send to VS Code'; btn.classList.remove('success'); btn.disabled = selectedIndices.size === 0; }, 2500);
     } else {
-      btn.textContent = '✗ Server error';
-      setTimeout(() => { btn.textContent = 'Send to VS Code'; btn.disabled = false; }, 3000);
+      btnText.textContent = 'Server error';
+      btn.classList.add('error');
+      setTimeout(() => { btnText.textContent = 'Send to VS Code'; btn.classList.remove('error'); btn.disabled = false; }, 3000);
     }
   } catch {
-    btn.textContent = '✗ VS Code not running?';
-    setTimeout(() => { btn.textContent = 'Send to VS Code'; btn.disabled = false; }, 3500);
+    btnText.textContent = 'VS Code not running?';
+    btn.classList.add('error');
+    setTimeout(() => { btnText.textContent = 'Send to VS Code'; btn.classList.remove('error'); btn.disabled = false; }, 3500);
   }
 });
