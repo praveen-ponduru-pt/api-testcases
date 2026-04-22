@@ -21,10 +21,17 @@ function buildEntry(req, body) {
   };
 }
 
+let saveTimeout = null;
+
+function saveCaptured() {
+  try { chrome.storage.local.set({ capturedRequests: captured }); } catch (_) {}
+}
+
 function pushEntry(entry) {
   if (captured.length >= MAX_CAPTURED) captured.shift();
   captured.push(entry);
-  try { chrome.storage.local.set({ capturedRequests: captured }); } catch (_) {}
+  if (saveTimeout) clearTimeout(saveTimeout);
+  saveTimeout = setTimeout(saveCaptured, 200);
 }
 
 function loadFromHAR() {
