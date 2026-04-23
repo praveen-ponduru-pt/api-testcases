@@ -75,3 +75,9 @@ API_TOKEN=your_bearer_token_here
 
 - **`api-tests.http`** — REST Client-compatible file with happy path, invalid auth, missing/invalid parameter scenarios
 - **`testcases/*.md`** — Markdown docs with preconditions, steps, and expected results per endpoint
+
+## Known Issues
+
+### `.http` files not recognized by HTTP Client extension
+
+On first install, the [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) (HTTP Client) extension may not recognize `.http` files — the **Send Request** code lens won't appear. To fix this, uninstall the extension and reinstall it.
