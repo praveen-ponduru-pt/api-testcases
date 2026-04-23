@@ -11,19 +11,28 @@ A two-part tool that captures live API calls from the browser and automatically 
 
 ```
 api-testcases/
-├── chrome-extension/     # Browser extension (Manifest V3)
-│   ├── devtools.html/js  # DevTools panel integration
-│   ├── panel.html/js     # Network capture panel
-│   └── popup.html/js     # Extension popup
-├── vscode-extension/     # VS Code extension
-│   └── src/
-│       ├── extension.ts  # Entry point, commands, file writing
-│       ├── generator.ts  # Claude API integration
-│       ├── server.ts     # Local HTTP server (port 3333)
-│       └── types.ts      # Shared types
-├── testcases/            # Generated markdown test cases (gitignored)
-├── api-tests.http        # Generated .http test file
-└── .env                  # API token (gitignored)
+├── chrome-extension/          # Browser extension (Manifest V3)
+│   ├── devtools.html/js       # DevTools panel integration
+│   ├── panel.html/js          # Network capture panel
+│   ├── popup.html/js          # Extension popup
+│   ├── shared.js              # Shared utilities
+│   ├── icons/                 # Extension icons
+│   └── manifest.json
+├── vscode-extension/          # VS Code extension
+│   ├── src/
+│   │   ├── extension.ts       # Entry point, commands, file writing
+│   │   ├── generator.ts       # Claude Language Model integration
+│   │   ├── prompt.ts          # Claude prompt builder
+│   │   ├── server.ts          # Local HTTP server (port 3333)
+│   │   └── types.ts           # Shared types
+│   ├── out/                   # Compiled JS (gitignored)
+│   ├── api-test-generator-1.1.0.vsix  # Installable extension package
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── .vscodeignore
+├── testcases/                 # Generated markdown test cases (gitignored)
+├── api-tests.http             # Generated .http test file
+└── .env                       # API token (gitignored)
 ```
 
 ## Setup
@@ -36,16 +45,12 @@ api-testcases/
 
 ### VS Code Extension
 
-1. Open the `vscode-extension/` folder in VS Code.
-2. Install dependencies:
-   ```bash
-   cd vscode-extension
-   npm install
-   ```
-3. Press `F5` to launch the **Extension Development Host** — a second VS Code window opens with the extension active.
-4. Open this workspace folder (`api-testcases/`) in that second window.
+1. Open the Extensions panel (`Ctrl+Shift+X`)
+2. Click the `...` menu (top-right of the panel) → **Install from VSIX...**
+3. Select `vscode-extension/api-test-generator-1.1.0.vsix`
+4. Reload VS Code when prompted
 
-The extension starts a local server on port 3333 automatically on activation.
+The extension activates automatically on startup and starts a local server on port 3333.
 
 ### Environment
 
