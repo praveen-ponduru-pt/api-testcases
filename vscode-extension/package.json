@@ -2,7 +2,7 @@
   "name": "api-test-generator",
   "displayName": "API Test Generator",
   "description": "Receive API endpoints from Chrome extension and generate .http test files + markdown test cases via Claude",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "publisher": "qa-poc",
   "engines": {
     "vscode": "^1.90.0"
